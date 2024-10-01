@@ -124,14 +124,13 @@ namespace DocWorkProject
                     new RightBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 },
                     new InsideHorizontalBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 },
                     new InsideVerticalBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 5 }
-                ),
-                new Font()
+                )
             );
+            table.AppendChild(tableProperties);
+            
             string[] tableWord =  { "№", "Наименование", "Затратный подход", "Вес",
                 "Сравнительный подход", "Вес", "Доходный подход",  "Вес", "____ (вид) стоимость",
                 "Первоначальная стоимость по бухгалтерскому учету", "Остаточная стоимость, руб."};
-
-            table.AppendChild(tableProperties);
 
             var countRow = Data.Estimates.Count + 2;
 
@@ -145,6 +144,11 @@ namespace DocWorkProject
 
                     if (i == 0)
                         tc.Append(new Paragraph(new Run(new Text(tableWord[j]))));
+
+                    if (i == tableWord.Length)
+                    {
+                        
+                    }
 
                     if (i <= countRow - 2 && i > 0)
                     {
