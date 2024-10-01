@@ -18,6 +18,22 @@
           }
         }
       },
+      "DocumentFormat.OpenXml.Features/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "3.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.Features.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.Features.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "DocumentFormat.OpenXml.Framework/3.1.0": {
         "type": "package",
         "dependencies": {
@@ -30,6 +46,22 @@
         },
         "runtime": {
           "lib/net6.0/DocumentFormat.OpenXml.Framework.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "DocumentFormat.OpenXml.Linq/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "DocumentFormat.OpenXml.Framework": "3.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.Linq.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DocumentFormat.OpenXml.Linq.dll": {
             "related": ".xml"
           }
         }
@@ -76,6 +108,29 @@
         "lib/netstandard2.0/DocumentFormat.OpenXml.xml"
       ]
     },
+    "DocumentFormat.OpenXml.Features/3.1.0": {
+      "sha512": "VqN2KNvXJBdFefScpWVxYnTo7tUEchC0Rguv2rqgxl9SGeyvG8CnqtB3b4SU+twiBpzeOCFSesnxxcAaoJ1jhQ==",
+      "type": "package",
+      "path": "documentformat.openxml.features/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "documentformat.openxml.features.3.1.0.nupkg.sha512",
+        "documentformat.openxml.features.nuspec",
+        "icon.png",
+        "lib/net35/DocumentFormat.OpenXml.Features.dll",
+        "lib/net35/DocumentFormat.OpenXml.Features.xml",
+        "lib/net40/DocumentFormat.OpenXml.Features.dll",
+        "lib/net40/DocumentFormat.OpenXml.Features.xml",
+        "lib/net46/DocumentFormat.OpenXml.Features.dll",
+        "lib/net46/DocumentFormat.OpenXml.Features.xml",
+        "lib/net8.0/DocumentFormat.OpenXml.Features.dll",
+        "lib/net8.0/DocumentFormat.OpenXml.Features.xml",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.Features.dll",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.Features.xml"
+      ]
+    },
     "DocumentFormat.OpenXml.Framework/3.1.0": {
       "sha512": "yz78IAteV+/jdpmQRlBIfhsmYfDYqgPSyPUsyT7KnfDlTTvqY6Zf5inMjTSwe2bnN8wv9dLD0C2sAkActXIy/A==",
       "type": "package",
@@ -99,6 +154,29 @@
         "lib/net8.0/DocumentFormat.OpenXml.Framework.xml",
         "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.dll",
         "lib/netstandard2.0/DocumentFormat.OpenXml.Framework.xml"
+      ]
+    },
+    "DocumentFormat.OpenXml.Linq/3.1.0": {
+      "sha512": "+v/VnRFMxqkGZc2bg7eBP2vahBjChQU4VNG10g2ByspsJEzz50owOjuItyMxgu/iqxdTv5oGpTOadpowNbikAQ==",
+      "type": "package",
+      "path": "documentformat.openxml.linq/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "documentformat.openxml.linq.3.1.0.nupkg.sha512",
+        "documentformat.openxml.linq.nuspec",
+        "icon.png",
+        "lib/net35/DocumentFormat.OpenXml.Linq.dll",
+        "lib/net35/DocumentFormat.OpenXml.Linq.xml",
+        "lib/net40/DocumentFormat.OpenXml.Linq.dll",
+        "lib/net40/DocumentFormat.OpenXml.Linq.xml",
+        "lib/net46/DocumentFormat.OpenXml.Linq.dll",
+        "lib/net46/DocumentFormat.OpenXml.Linq.xml",
+        "lib/net8.0/DocumentFormat.OpenXml.Linq.dll",
+        "lib/net8.0/DocumentFormat.OpenXml.Linq.xml",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.Linq.dll",
+        "lib/netstandard2.0/DocumentFormat.OpenXml.Linq.xml"
       ]
     },
     "System.IO.Packaging/8.0.0": {
@@ -133,7 +211,10 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "DocumentFormat.OpenXml >= 3.1.0"
+      "DocumentFormat.OpenXml >= 3.1.0",
+      "DocumentFormat.OpenXml.Features >= 3.1.0",
+      "DocumentFormat.OpenXml.Framework >= 3.1.0",
+      "DocumentFormat.OpenXml.Linq >= 3.1.0"
     ]
   },
   "packageFolders": {
@@ -182,6 +263,18 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "DocumentFormat.OpenXml": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "DocumentFormat.OpenXml.Features": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "DocumentFormat.OpenXml.Framework": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "DocumentFormat.OpenXml.Linq": {
             "target": "Package",
             "version": "[3.1.0, )"
           }

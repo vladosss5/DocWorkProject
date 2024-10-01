@@ -48,6 +48,18 @@
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[3.1.0, )"
+            },
+            "DocumentFormat.OpenXml.Features": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "DocumentFormat.OpenXml.Framework": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "DocumentFormat.OpenXml.Linq": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             }
           },
           "imports": [

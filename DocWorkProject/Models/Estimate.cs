@@ -30,5 +30,5 @@ public class Estimate
     /// <summary>
     /// Родительская модель.
     /// </summary>
-    public DataModel? ParentModel { get; set; }
+    public WordDataModel? ParentModel { get; set; }
 }

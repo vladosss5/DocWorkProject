@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace DocWorkProject.Models;
 
-public class DataModel
+public class WordDataModel
 {
     /// <summary>
     /// Id.
@@ -52,5 +52,5 @@ public class DataModel
     /// <summary>
     /// Список оценок.
     /// </summary>
-    public virtual ICollection<Estimate> Estimates { get; set; } = new Collection<Estimate>();
+    public virtual List<Estimate> Estimates { get; set; } = new List<Estimate>();
 }

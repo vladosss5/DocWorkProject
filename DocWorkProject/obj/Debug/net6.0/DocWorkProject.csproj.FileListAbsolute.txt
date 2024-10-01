@@ -1,4 +1,3 @@
-C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocFileDirrect\ConclusionTemplate.docx
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocWorkProject.exe
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocWorkProject.deps.json
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocWorkProject.runtimeconfig.json
@@ -18,3 +17,6 @@ C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\obj\Debug\ne
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\obj\Debug\net6.0\DocWorkProject.pdb
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\obj\Debug\net6.0\DocWorkProject.genruntimeconfig.cache
 C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\obj\Debug\net6.0\ref\DocWorkProject.dll
+C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocumentFormat.OpenXml.Features.dll
+C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocumentFormat.OpenXml.Linq.dll
+C:\Users\KiporovVA\Documents\Projects\DocWorkProject\DocWorkProject\bin\Debug\net6.0\DocFileDirrect\ConclusionTemplate.docx
