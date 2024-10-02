@@ -145,42 +145,41 @@ namespace DocWorkProject
                     var run = new Run();
 
                     var runProperties = new RunProperties();
-                    runProperties.Append(new RunFonts { Ascii = "Times New Roman" }); // Шрифт Times New Roman
-                    runProperties.Append(new FontSize { Val = "20" }); // 10pt = 20 half-points
+                    runProperties.Append(new RunFonts { Ascii = "Times New Roman" });
+                    runProperties.Append(new FontSize { Val = "20" });
 
                     run.Append(runProperties);
 
                     var paragraphProperties = new ParagraphProperties();
-                    paragraphProperties.Append(new Justification { Val = JustificationValues.Center }); // Выравнивание по центру
+
+                    paragraphProperties.Append(new Justification { Val = JustificationValues.Center });
 
                     paragraph.Append(paragraphProperties);
                     paragraph.Append(run);
+
+                    var cellProps = new TableCellProperties();
+
+                    cellProps.Append(new TableCellVerticalAlignment { Val = TableVerticalAlignmentValues.Center });
 
                     if (i == 0)
                     {
                         if (j < baseTableWord.Length - 2)
                         {
                             run.Append(new Text(baseTableWord[j]));
-                            var cellProps = new TableCellProperties();
                             cellProps.Append(new VerticalMerge { Val = MergedCellValues.Restart });
-                            tc.Append(cellProps);
                         }
                         else if (j == baseTableWord.Length - 2)
                         {
                             run.Append(new Text(baseTableWord[j]));
-                            var cellProps = new TableCellProperties();
                             cellProps.Append(new GridSpan { Val = 2 });
-                            tc.Append(cellProps);
-                            j++; // Пропустить следующий столбец, так как идет объединение
+                            j++;
                         }
                     }
                     else if (i == 1)
                     {
                         if (j < baseTableWord.Length - 2)
                         {
-                            var cellProps = new TableCellProperties();
                             cellProps.Append(new VerticalMerge { Val = MergedCellValues.Continue });
-                            tc.Append(cellProps);
                         }
                         else
                         {
@@ -196,6 +195,10 @@ namespace DocWorkProject
                                 break;
                             case 1:
                                 run.Append(new Text(Data.Estimates[i - 2].Name!));
+
+                                var leftAlignProps = new ParagraphProperties();
+                                leftAlignProps.Append(new Justification { Val = JustificationValues.Left });
+                                paragraph.ParagraphProperties = leftAlignProps;
                                 break;
                             case 9:
                                 run.Append(new Text(Data.Estimates[i - 2].InitialCost + " руб."));
@@ -208,11 +211,19 @@ namespace DocWorkProject
                     else if (i == countRow - 1)
                     {
                         if (j == 1)
+                        {
                             run.Append(new Text("Итого"));
+                            var leftAlignProps = new ParagraphProperties();
+                            leftAlignProps.Append(new Justification { Val = JustificationValues.Left });
+                            paragraph.ParagraphProperties = leftAlignProps;
+                        }
                         else
+                        {
                             run.Append(new Text(""));
+                        }
                     }
 
+                    tc.Append(cellProps); // Применить свойства ячейки
                     tc.Append(paragraph);
                     tr.Append(tc);
                 }
