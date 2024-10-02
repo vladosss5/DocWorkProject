@@ -21,6 +21,9 @@
       <None Update="DocFileDirrect\ConclusionTemplate_1.docx">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="DocFileDirrect\TableTestDoc.docx">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

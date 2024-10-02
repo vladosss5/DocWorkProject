@@ -1,17 +1,10 @@
-﻿using System.Net.Mime;
-using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
-using DocumentFormat.OpenXml.Office2013.Excel;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocWorkProject.Models;
-using Array = DocumentFormat.OpenXml.Office2019.Excel.RichData2.Array;
-using DTableCell = DocumentFormat.OpenXml.Wordprocessing.TableCell;
-using DTableRow = DocumentFormat.OpenXml.Wordprocessing.TableRow;
-using DText = DocumentFormat.OpenXml.Wordprocessing.Text;
-using DRun = DocumentFormat.OpenXml.Wordprocessing.Run;
-using Font = DocumentFormat.OpenXml.Spreadsheet.Font;
 
 namespace DocWorkProject
 {
@@ -111,7 +104,6 @@ namespace DocWorkProject
             }
         }
 
-
         public static Table CreateTable()
         {
             var table = new Table();
@@ -127,51 +119,101 @@ namespace DocWorkProject
                 )
             );
             table.AppendChild(tableProperties);
-            
-            string[] tableWord =  { "№", "Наименование", "Затратный подход", "Вес",
-                "Сравнительный подход", "Вес", "Доходный подход",  "Вес", "____ (вид) стоимость",
-                "Первоначальная стоимость по бухгалтерскому учету", "Остаточная стоимость, руб."};
 
-            var countRow = Data.Estimates.Count + 2;
+            string[] baseTableWord =
+            {
+                "№", "Наименование", "Затратный подход", "Вес",
+                "Сравнительный подход", "Вес", "Доходный подход", "Вес", "____ (вид) стоимость",
+                "Учетная стоимость на дату оценки", ""
+            };
+
+            string[] childTableWord =
+                { "Первоначальная стоимость по бухгалтерскому учету", "Остаточная стоимость по бухгалтерскому учету" };
+
+            var countRow = Data.Estimates.Count + 3;
+            var difference = baseTableWord.Length - childTableWord.Length;
 
             for (int i = 0; i < countRow; ++i)
             {
                 var tr = new TableRow();
 
-                for (int j = 0; j < tableWord.Length; ++j)
+                for (int j = 0; j < baseTableWord.Length; ++j)
                 {
                     var tc = new TableCell();
 
+                    var paragraph = new Paragraph();
+                    var run = new Run();
+
+                    var runProperties = new RunProperties();
+                    runProperties.Append(new RunFonts { Ascii = "Times New Roman" }); // Шрифт Times New Roman
+                    runProperties.Append(new FontSize { Val = "20" }); // 10pt = 20 half-points
+
+                    run.Append(runProperties);
+
+                    var paragraphProperties = new ParagraphProperties();
+                    paragraphProperties.Append(new Justification { Val = JustificationValues.Center }); // Выравнивание по центру
+
+                    paragraph.Append(paragraphProperties);
+                    paragraph.Append(run);
+
                     if (i == 0)
-                        tc.Append(new Paragraph(new Run(new Text(tableWord[j]))));
-
-                    if (i == tableWord.Length)
                     {
-                        
+                        if (j < baseTableWord.Length - 2)
+                        {
+                            run.Append(new Text(baseTableWord[j]));
+                            var cellProps = new TableCellProperties();
+                            cellProps.Append(new VerticalMerge { Val = MergedCellValues.Restart });
+                            tc.Append(cellProps);
+                        }
+                        else if (j == baseTableWord.Length - 2)
+                        {
+                            run.Append(new Text(baseTableWord[j]));
+                            var cellProps = new TableCellProperties();
+                            cellProps.Append(new GridSpan { Val = 2 });
+                            tc.Append(cellProps);
+                            j++; // Пропустить следующий столбец, так как идет объединение
+                        }
                     }
-
-                    if (i <= countRow - 2 && i > 0)
+                    else if (i == 1)
+                    {
+                        if (j < baseTableWord.Length - 2)
+                        {
+                            var cellProps = new TableCellProperties();
+                            cellProps.Append(new VerticalMerge { Val = MergedCellValues.Continue });
+                            tc.Append(cellProps);
+                        }
+                        else
+                        {
+                            run.Append(new Text(childTableWord[j - difference]));
+                        }
+                    }
+                    else if (i > 1 && i < countRow - 1)
                     {
                         switch (j)
                         {
                             case 0:
-                                tc.Append(new Paragraph(new Run(new Text(i.ToString()))));
+                                run.Append(new Text((i - 1).ToString()));
                                 break;
                             case 1:
-                                tc.Append(new Paragraph(new Run(new Text(Data.Estimates[i - 1].Name!))));
+                                run.Append(new Text(Data.Estimates[i - 2].Name!));
                                 break;
                             case 9:
-                                tc.Append(new Paragraph(new Run(new Text(Data.Estimates[i - 1].InitialCost.ToString()))));
+                                run.Append(new Text(Data.Estimates[i - 2].InitialCost + " руб."));
                                 break;
                             case 10:
-                                tc.Append(new Paragraph(new Run(new Text(Data.Estimates[i - 1].ResidualCost.ToString()))));
+                                run.Append(new Text(Data.Estimates[i - 2].ResidualCost + " руб."));
                                 break;
                         }
                     }
+                    else if (i == countRow - 1)
+                    {
+                        if (j == 1)
+                            run.Append(new Text("Итого"));
+                        else
+                            run.Append(new Text(""));
+                    }
 
-                    if (i == countRow - 1 && j == 1)
-                        tc.Append(new Paragraph(new Run(new Text("Итого"))));
-
+                    tc.Append(paragraph);
                     tr.Append(tc);
                 }
 
